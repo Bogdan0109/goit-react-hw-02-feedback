@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Wrapper, Title, FeedbackReviews, Button } from './App.styled';
+import { Wrapper } from './App.styled';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+import { Section } from './Section/Section';
 import { Statistics } from './Statistics/Statistics';
 
 export class App extends Component {
@@ -46,34 +48,22 @@ export class App extends Component {
 
     return (
       <Wrapper className="Reviews">
-        <Title className="Feedback__span">Please leave feedback</Title>
-        <FeedbackReviews
-          className="Feedback__reviews"
-          onClick={this.handleClick}
-        >
-          <Button name="good" type="button">
-            Good
-          </Button>
-
-          <Button name="neutral" type="button">
-            Neutal
-          </Button>
-
-          <Button name="bad" type="button">
-            Bad
-          </Button>
-        </FeedbackReviews>
+        <Section title={'Please leave feedback'}>
+          <FeedbackOptions onClick={this.handleClick} />
+        </Section>
 
         {total === 0 ? (
           <span>There is no feedback</span>
         ) : (
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={total}
-            positivePercentage={positiveFeedback}
-          />
+          <Section title={'Statistics'}>
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              positivePercentage={positiveFeedback}
+            />
+          </Section>
         )}
       </Wrapper>
     );

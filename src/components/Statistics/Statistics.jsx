@@ -1,4 +1,4 @@
-import { Title, StatisticsReviews, Span } from '../App.styled';
+import { StatisticsReviews, Span } from '../App.styled';
 
 export const Statistics = ({
   good,
@@ -9,7 +9,6 @@ export const Statistics = ({
 }) => {
   return (
     <>
-      <Title className="Statistics__span">Statistics</Title>
       <StatisticsReviews className="Statistics__reviews">
         <Span>Good: {good}</Span>
         <Span>Neutal: {neutral}</Span>

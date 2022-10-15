@@ -1,4 +1,5 @@
-import { FeedbackReviews, Button } from '../App.styled';
+import PropTypes from 'prop-types';
+import { FeedbackReviews, Button } from './FeedbackOptions.styled';
 
 export const FeedbackOptions = ({ onClick }) => {
   return (
@@ -18,4 +19,8 @@ export const FeedbackOptions = ({ onClick }) => {
       </FeedbackReviews>
     </>
   );
+};
+
+FeedbackOptions.propType = {
+  onClick: PropTypes.func.isRequired,
 };

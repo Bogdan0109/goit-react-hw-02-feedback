@@ -1,4 +1,5 @@
-import { StatisticsReviews, Span } from '../App.styled';
+import PropTypes from 'prop-types';
+import { StatisticsReviews, Span } from './Statistics.styled';
 
 export const Statistics = ({
   good,
@@ -18,4 +19,12 @@ export const Statistics = ({
       </StatisticsReviews>
     </>
   );
+};
+
+Statistics.propType = {
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  positivePercentage: PropTypes.number.isRequired,
 };

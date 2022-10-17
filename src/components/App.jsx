@@ -10,47 +10,46 @@ export class App extends Component {
     good: 0,
     neutral: 0,
     bad: 0,
-    total: 0,
-    positiveFeedback: 100,
   };
 
-  handleClick = e => {
-    if (e.target.nodeName !== 'BUTTON') {
-      return;
-    }
+  handleClick = comment => {
+    console.log(comment);
+    // if (e.target.nodeName !== 'BUTTON') {
+    //   return;
+    // }
 
-    const { name } = e.target;
+    // const { name } = e.target;
 
-    this.setState({ [name]: this.state[name] + 1 });
-    this.countTotalFeedback();
-    this.countPositiveFeedbackPercentage();
+    this.setState(prevState => {
+      return { [comment]: prevState[comment] + 1 };
+    });
+    // this.countTotalFeedback();
+    // this.countPositiveFeedbackPercentage();
   };
 
   countTotalFeedback = () => {
-    this.setState(prewState => {
-      return { total: prewState.good + prewState.neutral + prewState.bad };
-    });
+    const values = Object.values(this.state);
+    return values.reduce((acc, value) => acc + value, 0);
   };
 
   countPositiveFeedbackPercentage = () => {
-    // const { good, total } = this.state;
+    const { good } = this.state;
 
-    this.setState(prewState => {
-      return {
-        positiveFeedback: Math.round((prewState.good / prewState.total) * 100),
-      };
-    });
-    /* <span>There is no feedback</span> */
-    // return Math.round((good / this.countTotalFeedback()) * 100);
+    return Math.round((good / this.countTotalFeedback()) * 100);
   };
 
   render() {
-    const { good, neutral, bad, total, positiveFeedback } = this.state;
+    const { good, neutral, bad } = this.state;
+    const total = this.countTotalFeedback();
+    const positiveFeedback = this.countPositiveFeedbackPercentage();
 
     return (
       <Wrapper className="Reviews">
         <Section title={'Please leave feedback'}>
-          <FeedbackOptions onClick={this.handleClick} />
+          <FeedbackOptions
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.handleClick}
+          />
         </Section>
 
         {total === 0 ? (

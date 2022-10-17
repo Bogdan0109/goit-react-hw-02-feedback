@@ -1,22 +1,25 @@
 import PropTypes from 'prop-types';
-import { FeedbackReviews, Button } from './FeedbackOptions.styled';
+import { FeedbackList, Button } from './FeedbackOptions.styled';
+import { nanoid } from 'nanoid';
 
-export const FeedbackOptions = ({ onClick }) => {
+export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <>
-      <FeedbackReviews className="Feedback__reviews" onClick={onClick}>
-        <Button name="good" type="button">
-          Good
-        </Button>
-
-        <Button name="neutral" type="button">
-          Neutal
-        </Button>
-
-        <Button name="bad" type="button">
-          Bad
-        </Button>
-      </FeedbackReviews>
+      <FeedbackList className="Feedback__reviews">
+        {options.map(option => {
+          return (
+            <li key={nanoid()}>
+              <Button
+                name={option}
+                type="button"
+                onClick={() => onLeaveFeedback(option)}
+              >
+                {option}
+              </Button>
+            </li>
+          );
+        })}
+      </FeedbackList>
     </>
   );
 };
